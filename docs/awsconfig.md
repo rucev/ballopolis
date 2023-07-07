@@ -13,9 +13,11 @@
 
 - As a recomendation, run t2.micro for free and give permision to http, https and ssh.
 
-## 4. Install docker with yum
+## 4. Install docker with yum and run it
 ```sh
 $ sudo yum install docker
+$ sudo systemctl start docker
+$ sudo systemctl enable docker # with this you make sure every time this instance runs it starts docker automatically
 ```
 
 ## 5. Create github action to have a pipeline
@@ -27,16 +29,16 @@ $ sudo yum install docker
 - Access [here](https://hub.docker.com/).
 
 ### Create repository github secret
+
 - As explained [here](https://github.com/docker/login-action#docker-hub).
 
 ### Configure github action for build and push
 - As explained [here](https://github.com/docker/build-push-action).
 - *All* my configuration files are:
-    - [flors-rueda-ci-cd.yml](../../../../../.github/workflows/flors-rueda-ci-cd.yml).
-    - [Dockerfile for the backend](../Dockerfile)
-    - [docker-compose.yml](../docker-compose.yml)
-    - [nginx configuration](../nginx/nginx.conf)
-    - [Dockerfile for the front](../nginx/Dockerfile)
+    - [flors-rueda.yml](../.github/workflows/flors-rueda.yml)
+    - [Dockerfile for the backend](../docker/back/Dockerfile)
+    - [nginx configuration](../docker/front/nginx.conf)
+    - [Dockerfile for the front](../docker/front/Dockerfile)
 
 - With nginx I connect front and back on the same IP, avoiding cors security errors or browser issues.
 
@@ -51,7 +53,31 @@ vim docker-compose.yml
 ```
 - Press **i** to write, **v** to select and **d** to delete.
 
-- With right click paste this [docker-compose.yml](../docker-compose.yml) and press ESC and **:wq**.
+- With right click paste the following and press ESC and **:wq**.
+```yml
+version: '3'
+services:
+  nginx:
+    restart: always
+    image: rucev/frontend
+    ports:
+      - 80:80
+  node:
+    restart: always
+    image: rucev/backend
+    environment:
+      MONGODB_URL: mongodb://mongo:27017/ballopolis
+    ports:
+      - 4321:4321
+  mongo:
+    image: mongo:6.0.3
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+volumes:
+ mongodb:
+```
 
 ```sh
 $ sudo docker-compose up -d
@@ -69,9 +95,7 @@ $ curl -v -X POST localhost:80/api/levels -H "Content-Type: application/json" -d
 ## Acces the ip to check if the front is running, everything should be fine!
 
 
-
 ![](./img/aws.png)
 
 
 
-systemctl start docker
