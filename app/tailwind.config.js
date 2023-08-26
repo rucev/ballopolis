@@ -3,6 +3,9 @@
 
 export default {
     content: ["./index.html", "./src/**/*.jsx"],
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
     theme: {
         extend: {
             colors: {
@@ -12,12 +15,14 @@ export default {
                 primary400: 'var(--color-primary-400)',
                 primary500: 'var(--color-primary-500)',
                 primary600: 'var(--color-primary-600)',
+                primaryShadow: 'var(--color-primary-shadow)',
                 secondary100: 'var(--color-secondary-100)',
                 secondary200: 'var(--color-secondary-200)',
                 secondary300: 'var(--color-secondary-300)',
                 secondary400: 'var(--color-secondary-400)',
                 secondary500: 'var(--color-secondary-500)',
                 secondary600: 'var(--color-secondary-600)',
+                secondaryShadow: 'var(--color-secondary-shadow)',
                 light100: 'var(--color-light-100)',
                 light200: 'var(--color-light-200)',
                 light300: 'var(--color-light-300)',
@@ -28,6 +33,7 @@ export default {
                 dark300: 'var(--color-dark-300)',
                 dark400: 'var(--color-dark-400)',
                 dark500: 'var(--color-dark-500)',
+                darkShadow: 'var(--color-dark-shadow)',
                 warning100: 'var(--color-warning-100)',
                 warning200: 'var(--color-warning-200)',
                 warning300: 'var(--color-warning-300)',
@@ -37,6 +43,21 @@ export default {
                 success100: 'var(--color-success-100)',
                 success200: 'var(--color-success-200)',
                 success300: 'var(--color-success-300)',
+                gray: 'var(--color-gray)',
+                red: 'var(--color-red)',
+                orange: 'var(--color-orange)',
+                ambar: 'var(--color-ambar)',
+                yellow: 'var(--color-yellow)',
+                lime: 'var(--color-lime)',
+                green: 'var(--color-green)',
+                teal: 'var(--color-teal)',
+                cyan: 'var(--color-cyan)',
+                blue: 'var(--color-blue)',
+                indigo: 'var(--color-indigo)',
+                violet: 'var(--color-violet)',
+                fuchsia: 'var(--color-fuchsia)',
+                pink: 'var(--color-pink)',
+                rose: 'var(--color-rose)'
             },
         }
     },

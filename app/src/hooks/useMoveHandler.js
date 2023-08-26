@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import * as THREE from 'three';
-import { createFloor } from '../helpers/createFloor';
-import { checkCollisions } from '../helpers/checkCollisions';
+import { createFloor } from '../helpers/game/createFloor';
+import { checkCollisions } from '../helpers/game/checkCollisions';
 
-//TODO improve movement on desktop
-
-const useMoveHandler = (floor, scene, camera, onSolved, onGameWon, onBomb, onLife) => {
+const useMoveHandler = (floor, scene, camera, onSolved, onGameWon, onBomb, onLife, avatar) => {
     const gridSize = floor.length;
     const cellSize = 1.5;
 
-    const floorObjects = createFloor(floor, scene, cellSize);
+    const floorObjects = createFloor(floor, scene, cellSize, avatar);
     const ball = floorObjects.ball;
 
     let isDragging = false;
@@ -20,10 +18,34 @@ const useMoveHandler = (floor, scene, camera, onSolved, onGameWon, onBomb, onLif
     let lastClientX = 0;
     let lastClientY = 0;
 
+    let offset = new THREE.Vector3();
+
     useEffect(() => {
-        const onMoveStart = () => {
-            isDragging = true;
-            rotationSpeed = draggingRotationSpeed;
+        const onMoveStart = (event) => {
+            const clientX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX;
+            const clientY = event.type === 'touchstart' ? event.touches[0].clientY : event.clientY;
+
+            const vector = new THREE.Vector3(
+                (clientX / window.innerWidth) * 2 - 1,
+                -(clientY / window.innerHeight) * 2 + 1,
+                0.5
+            );
+
+            vector.unproject(camera);
+            const dir = vector.sub(camera.position).normalize();
+            const distance = -camera.position.z / dir.z;
+            const cursorPosition = camera.position.clone().add(dir.multiplyScalar(distance));
+
+            const distanceToBall = cursorPosition.distanceTo(ball.position);
+
+            if (distanceToBall < 2) {
+                isDragging = true;
+                rotationSpeed = draggingRotationSpeed;
+                offset.copy(cursorPosition).sub(ball.position);
+            }
+
+            lastClientX = clientX;
+            lastClientY = clientY;
         };
 
         const onMoveEnd = () => {
@@ -47,7 +69,8 @@ const useMoveHandler = (floor, scene, camera, onSolved, onGameWon, onBomb, onLif
                 vector.unproject(camera);
                 const dir = vector.sub(camera.position).normalize();
                 const distance = -camera.position.z / dir.z;
-                const ballPosition = camera.position.clone().add(dir.multiplyScalar(distance));
+
+                const ballPosition = camera.position.clone().add(dir.multiplyScalar(distance)).sub(offset);
 
                 const minGridX = -(gridSize) / 2 * cellSize;
                 const maxGridX = (gridSize) / 2 * cellSize;
@@ -80,7 +103,6 @@ const useMoveHandler = (floor, scene, camera, onSolved, onGameWon, onBomb, onLif
             document.removeEventListener('touchstart', onMoveStart);
             document.removeEventListener('touchend', onMoveEnd);
             document.removeEventListener('touchmove', onMove);
-
         };
     }, []);
 

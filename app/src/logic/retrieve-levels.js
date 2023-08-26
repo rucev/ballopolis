@@ -1,38 +1,45 @@
 import { validators } from 'com';
+import { extractSubFromToken } from './tokenUtils/tokenUtils';
+const { validatePage, validateSort } = validators;
+import context from './context';
 
-const { validateCallback } = validators;
+/**
+ * Retrieves levels with specified sorting and pagination parameters.
+ *
+ * @param {string} sort - The sorting parameter for the retrieved levels.
+ * @param {number} page - The pagination parameter for the retrieved levels.
+ * @returns {[object]} A Promise that resolves with retrieved levels information.
+ * @throws {Error} If the validation of the sorting parameter or page fails, or if the request fails.
+ */
 
-const retrieveLevels = (callback) => {
-  validateCallback(callback)
+const retrieveLevels = (sort, page) => {
+  validateSort(sort);
+  validatePage(page);
 
-  const xhr = new XMLHttpRequest()
+  const url = new URL(`${import.meta.env.VITE_API_URL}/levels`);
+  url.searchParams.append('sort', sort);
+  url.searchParams.append('page', page);
 
-  xhr.onload = () => {
-    const { status } = xhr
-
-    if (status !== 200) {
-      const { response: json } = xhr
-      const { error } = JSON.parse(json)
-
-      callback(new Error(error))
-
-      return
+  return fetch(url, {
+    headers: {
+      Authorization: `Bearer ${context.token}`
     }
-
-    const { response: json } = xhr
-    const levels = JSON.parse(json)
-
-    callback(null, levels)
-  }
-
-  xhr.onerror = () => {
-    callback(new Error('Connection error'))
-  }
-
-  xhr.open('GET', `${import.meta.env.VITE_API_URL}/levels`)
-
-
-  xhr.send()
-}
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      for (let level of data.levels) {
+        level.isLevelLiked = (level.likes).includes(extractSubFromToken(context.token))
+      }
+      return data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 
 export default retrieveLevels

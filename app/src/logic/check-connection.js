@@ -1,33 +1,20 @@
-import { validators } from 'com';
+/**
+ * Checks the connection to the Api
+ *
+ * @returns {boolean} A Promise that resolves to true if the connection is successful.
+ * @throws {Error} If the connection check fails or encounters an error.
+ */
+const CheckConnection = () => {
+    return fetch(`${import.meta.env.VITE_API_URL}/`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Request failed');
+            }
+            return true;
+        })
+        .catch((error) => {
+            throw new Error(error.message);
+        });
+};
 
-const { validateCallback } = validators;
-
-const CheckConnection = (callback) => {
-    validateCallback(callback);
-
-    const xhr = new XMLHttpRequest();
-
-    xhr.onload = () => {
-        const { status } = xhr;
-
-        if (status !== 200) {
-            const { response: json } = xhr;
-            const { error } = JSON.parse(json);
-            callback(new Error(error));
-
-            return
-        }
-
-        callback(null);
-    }
-
-    xhr.onerror = () => {
-        callback(new Error('Connection error'))
-    }
-
-    xhr.open('GET', `${import.meta.env.VITE_API_URL}/`);
-
-    xhr.send();
-}
-
-export default CheckConnection
+export default CheckConnection;

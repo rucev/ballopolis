@@ -1,12 +1,18 @@
-const { retrieveLevels } = require('../logic')
+const { retrieveLevels } = require('../logic');
+const { handleErrors, extractUserId } = require('./helpers');
 
-module.exports = (req, res) => {
-    try {
+/**
+ * Route handler to retrieve all levels created so far.
+ *
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @returns {Promise} A Promise that resolves after successfully retrieve all levels.
+ * @throws {Error} If there is an error.
+ */
+module.exports = handleErrors((req, res) => {
+    const sort = parseInt(req.query.sort) || 0;
+    const page = parseInt(req.query.page) || 1;
+    const userId = extractUserId(req);
 
-        retrieveLevels()
-            .then((levels) => res.json(levels))
-            .catch((error) => res.status(400).json({ error: error.message }));
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
+    return retrieveLevels(userId, sort, page).then((levels) => res.json(levels));
+});

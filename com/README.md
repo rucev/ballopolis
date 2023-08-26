@@ -1,7 +1,7 @@
 # Ballopolis Maze Riders - Com
-bluh bluh
+Common modules for the ballopolis app and api
 
 ## Modules
 - validators
-- utils
 - errors
+- assets
