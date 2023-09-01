@@ -5,20 +5,14 @@
 ## Intro
 This is a web app build as the final project for the ISDI Coders' online web development fullstack bootcamp.
 </br>
-</br>
 Ballopolis is meant to be a social game, where you create levels that are fun and challenging to beat for other players.
-</br>
 </br>
 In doing so, you earn achivements to add to your profile and show off to other users.
 </br>
-</br>
 To create those levels you need to earn Customization Credits by playing other people levels.
-</br>
 </br>
 So you play levels to earn points to create levels that other people will play to earn points to create levels that you will play!
 </br>
-</br>
-
 [PLAY NOW!](https://ballopolis.rucev.com/)
 
 ## Functional description
@@ -83,7 +77,6 @@ The initial views were drawn in a whiteboard, digitalized and add to uizard.io t
 **Achivements**
 - user (oid)
 - progressByAchivement (array of objects)
-</br>
 
 *progressByAchivement* 
 - code (string)
@@ -100,7 +93,6 @@ The initial views were drawn in a whiteboard, digitalized and add to uizard.io t
 **Session**
 - user (oid)
 - sessionDetails (array of objects)
-</br>
 
 *sessionDetails* 
 - socketId (string)
