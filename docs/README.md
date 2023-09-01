@@ -33,8 +33,7 @@ So you play levels to earn points to create levels that other people will play t
 - see other users achivements
 - see other users created levels
 - customize your avatar
-</br>
-</br>
+
 
 ## UI desgin
 The initial views were drawn in a whiteboard, digitalized and add to uizard.io to create a prototype you can [see here](https://app.uizard.io/p/8a20cb17/preview).
@@ -54,8 +53,6 @@ The initial views were drawn in a whiteboard, digitalized and add to uizard.io t
 - MongoDB and Mongoose
 - Socket.IO
 - Mocha Chai *for backend testing*
-</br>
-</br>
 
 
 ### Data models
@@ -87,6 +84,7 @@ The initial views were drawn in a whiteboard, digitalized and add to uizard.io t
 - user (oid)
 - progressByAchivement (array of objects)
 </br>
+
 *progressByAchivement* 
 - code (string)
 - name (string)
@@ -97,18 +95,17 @@ The initial views were drawn in a whiteboard, digitalized and add to uizard.io t
 - isRankBronzeReached (boolean)
 - isRankSilverReached (boolean)
 - isRankGoldReached (boolean)
-</br>
-</br>
+
 
 **Session**
 - user (oid)
 - sessionDetails (array of objects)
 </br>
+
 *sessionDetails* 
 - socketId (string)
 - date (date)
-</br>
-</br>
+
 
 ### Test Coverage
 
@@ -173,8 +170,6 @@ All files                           |   99.03 |    91.87 |   98.95 |   98.93 |
 ## Planning
 
 Planned through a kanban visible on this [Trello](https://trello.com/b/uHRmZKBR/final-project-ballopolis).
-</br>
-</br>
 
 ### Epics & Stories
 
@@ -189,13 +184,12 @@ Planned through a kanban visible on this [Trello](https://trello.com/b/uHRmZKBR/
 #### **User views**
 - Me as a user, I want to have te option to update privacy settings and customize my profile.
 
-#### **Achivement**
+#### **Achivements**
 - Me as a user, I want to get little awards that stimulate me to keep playing and interact with other users.
 
 #### **Customization Credits**
 - Me as a user, I want to earn points when I play that I can spend to create more levels or customize my profile
 
-</br>
 
 ## Project setup
 This project is configured to run both in local or through EC2 on AWS. To know more [click here](./project-setup.md).
