@@ -58,12 +58,12 @@ const LevelsList = () => {
             <h2 className="text-primary300 text-xl font-bold text-center">Browse all levels that have been created</h2>
             <div className="flex flex-col gap-0.5">
                 <h2 className="text-secondary200 text-lg font-bold text-center">Sort by</h2>
-                <div className="flex flex-row text-secondary100 gap-3 justify-around">
-                    <button onClick={() => handleSorting(0)} className={`text-lg pt-0.5 ${sort === 0 ? 'text-primary100 decoration-primary300 underline' : 'text-secondary200 hover:text-primary100 hover:underline hover:decoration-primary300'}`}>Newest</button>
-                    <span className="text-xl text-light300 font-semibold">||</span>
-                    <button onClick={() => handleSorting(1)} className={`text-lg pt-0.5 ${sort === 1 ? 'text-primary100 decoration-primary300 underline' : 'text-secondary200 hover:text-primary100 hover:underline hover:decoration-primary300'}`}>Oldest</button>
-                    <span className="text-xl text-light300 font-semibold">||</span>
-                    <button onClick={() => handleSorting(2)} className={`text-lg pt-0.5 ${sort === 2 ? 'text-primary100 decoration-primary300 underline' : 'text-secondary200 hover:text-primary100 hover:underline hover:decoration-primary300'}`}>Most Liked</button>
+                <div className="flex flex-row text-secondary100 justify-around">
+                    <button onClick={() => handleSorting(0)} className={`text-lg py-3 px-2 ${sort === 0 ? 'text-primary100 decoration-primary300 underline' : 'text-secondary200 hover:text-primary100 hover:underline hover:decoration-primary300'}`}>Newest</button>
+                    <span className="text-xl text-light300 py-2 font-semibold">||</span>
+                    <button onClick={() => handleSorting(1)} className={`text-lg py-3 px-2 ${sort === 1 ? 'text-primary100 decoration-primary300 underline' : 'text-secondary200 hover:text-primary100 hover:underline hover:decoration-primary300'}`}>Oldest</button>
+                    <span className="text-xl text-light300 font-semibold py-2">||</span>
+                    <button onClick={() => handleSorting(2)} className={`text-lg py-3 px-2 ${sort === 2 ? 'text-primary100 decoration-primary300 underline' : 'text-secondary200 hover:text-primary100 hover:underline hover:decoration-primary300'}`}>Most Liked</button>
                 </div>
             </div>
             <div className="flex flex-row w-full justify-center items-center pt-5 pb-20 gap-2 flex-wrap">
