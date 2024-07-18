@@ -83,9 +83,9 @@ const Navbar = ({ updateUserInfo }) => {
     return (
         <div ref={navbarRef} className="z-50">
             <div className="fixed w-full shadow z-50">
-                <nav className="px-1 py-4 flex justify-between items-center bg-light500">
-                    <div className="flex row align-center pl-3">
-                        <Link className="text-3xl font-bold leading-none hidden lg:block" to="/" onClick={handleCloseBoth}>
+                <nav className="px-1 py-2 flex justify-between items-center bg-light500">
+                    <div className="flex row align-center pl-3 z-50">
+                        <Link className="text-3xl py-2 px-4 font-bold leading-none hidden lg:block" to="/" onClick={handleCloseBoth}>
                             <img src={logo} className="h-10 w-10" alt="Logo" />
                         </Link>
                         <div className="lg:hidden">
@@ -97,11 +97,11 @@ const Navbar = ({ updateUserInfo }) => {
                             </button>
                         </div>
                     </div>
-                    <div>
+                    <div className="z-30">
                         {isUserLoggedIn() && <>
-                            <div type="button" className="flex pr-4 text-sm bg-gray-800 rounded-full min-w-fit md:mr-0 focus:ring-2 focus:ring-light100" onClick={handleUserMenuClick}>
+                            <div type="button" className="flex px-5 py-2 text-sm bg-gray-800 rounded-full min-w-fit md:mr-0 focus:ring-2 focus:ring-light100 cursor-pointer" onClick={handleUserMenuClick}>
                                 <span className="sr-only">Open user menu</span>
-                                <div className="flex flex-row cursor-pointer">
+                                <div className="flex flex-row">
                                     <i className={`bi bi-chevron-compact-${(isUserMenuOpen ? 'up' : 'down')} self-end`}></i>
                                     <img className={`bg-${userInfo.color} w-8 h-8 rounded-full`} src={`${avatars[userInfo.avatar]}`} alt="avatar" />
                                 </div>
@@ -110,21 +110,21 @@ const Navbar = ({ updateUserInfo }) => {
                                         <i className="text-xl text-primary400 bi bi-piggy-bank"></i>
                                         <span className="block text-sm self-center">{userInfo.cc}cc</span>
                                     </div>
-                                    <ul className="pt-2 flex flex-col gap-5 justify-between" >
-                                        <li className="w-full text-sm text-dark300 rounded-lg hover:bg-light400 pl-2 px-3 hover:text-secondary500">
-                                            <Link to="/profile/you" onClick={handleCloseBoth} className="flex flex-row gap-2 align-center">
+                                    <ul className="pt-2 flex flex-col gap-0.5 justify-between pb-1" >
+                                        <li className="w-full text-sm text-dark300 rounded-lg hover:bg-light400 px-3 hover:text-secondary500">
+                                            <Link to="/profile/you" onClick={handleCloseBoth} className="flex flex-row gap-2 align-center py-2">
                                                 <i className="bi bi-person-fill"></i>
                                                 <span>{userInfo.username}</span>
                                             </Link>
                                         </li>
-                                        <li className="w-full text-sm text-dark300 rounded-lg hover:bg-light400 pl-2 px-3 hover:text-secondary500">
-                                            <Link to="/customize" onClick={handleCloseBoth} className="flex flex-row gap-2 align-center">
+                                        <li className="w-full text-sm text-dark300 rounded-lg hover:bg-light400 px-3 hover:text-secondary500">
+                                            <Link to="/customize" onClick={handleCloseBoth} className="flex flex-row gap-2 align-center py-2">
                                                 <i className="bi bi-palette"></i>
                                                 <span>Customize</span>
                                             </Link>
                                         </li>
-                                        <li className="w-full text-sm text-dark400 hover:text-secondary400 rounded-lg hover:bg-light400 pl-2 px-3">
-                                            <Link to="/settings" className="flex flex-row gap-2 align-center">
+                                        <li className="w-full text-sm text-dark400 hover:text-secondary400 rounded-lg hover:bg-light400 px-3">
+                                            <Link to="/settings" className="flex flex-row gap-2 align-center py-2">
                                                 <i className="bi bi-gear-fill"></i>
                                                 <span>Settings</span>
                                             </Link>
@@ -144,12 +144,12 @@ const Navbar = ({ updateUserInfo }) => {
                         }
 
                     </div>
-                    <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
+                    <ul className="hidden absolute lg:flex lg:w-full  lg:items-center lg:justify-center lg:space-x-6 z-0">
                         {isUserLoggedIn() && <>
                             <li>
                                 <Link
                                     className={
-                                        "text-sm " +
+                                        "text-sm px-2 py-5 " +
                                         (location.pathname === "/home"
                                             ? "text-secondary400"
                                             : "dark400 hover:text-secondary400")
@@ -164,7 +164,7 @@ const Navbar = ({ updateUserInfo }) => {
                             <li>
                                 <Link
                                     className={
-                                        "text-sm " +
+                                        "text-sm px-2 py-5 " +
                                         (location.pathname === "/levels"
                                             ? "text-secondary400"
                                             : "dark400 hover:text-secondary400")
@@ -179,7 +179,7 @@ const Navbar = ({ updateUserInfo }) => {
                             <li>
                                 <Link
                                     className={
-                                        "text-sm " +
+                                        "text-sm px-2 py-5 " +
                                         (location.pathname === "/search"
                                             ? "text-secondary400"
                                             : "dark400 hover:text-secondary400")
@@ -195,7 +195,7 @@ const Navbar = ({ updateUserInfo }) => {
                         <li>
                             <Link
                                 className={
-                                    "text-sm " +
+                                    "text-sm px-2 py-5 " +
                                     (location.pathname === "/create"
                                         ? "text-secondary400"
                                         : "dark400 hover:text-secondary400")
@@ -210,7 +210,7 @@ const Navbar = ({ updateUserInfo }) => {
                         <li>
                             <Link
                                 className={
-                                    "text-sm " +
+                                    "text-sm px-2 py-5 " +
                                     (location.pathname === "/tutorial"
                                         ? "text-secondary400"
                                         : "dark400 hover:text-secondary400")
@@ -225,7 +225,7 @@ const Navbar = ({ updateUserInfo }) => {
                         <li>
                             <Link
                                 className={
-                                    "text-sm " +
+                                    "text-sm px-2 py-5 " +
                                     (location.pathname === "/about"
                                         ? "text-secondary400"
                                         : "dark400 hover:text-secondary400")
