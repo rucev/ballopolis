@@ -95,7 +95,7 @@ const App = () => {
   return (
     <AppContext.Provider value={{ alert: handleShowAlert }}>
       <Navbar updateUserInfo={updateUserInfo} />
-      <div className="pt-5">
+      <div className="pt-5 min-h-screen">
         {achievementNotifications.map((notification, index) => (
           <AchievementToast
             key={index}
